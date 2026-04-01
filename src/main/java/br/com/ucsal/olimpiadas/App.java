@@ -2,11 +2,12 @@ package br.com.ucsal.olimpiadas;
 
 import br.com.ucsal.olimpiadas.repository.DataBase;
 import br.com.ucsal.olimpiadas.view.ComandoDeConsole;
+import br.com.ucsal.olimpiadas.view.QuestaoXadrez;
 import br.com.ucsal.olimpiadas.view.Xadrez;
 
 public class App {
 
-	public static void main(String[] args) {
+	static void main() {
 		seed();
 
 		while (true) {
@@ -82,13 +83,13 @@ public class App {
 		System.out.print("Alternativa correta (A–E): ");
 		char correta;
 		try {
-			correta = Questao.normalizar(ComandoDeConsole.pegaInput("").trim().charAt(0));
+			correta = QuestaoXadrez.normalizar(ComandoDeConsole.pegaInput("").trim().charAt(0));
 		} catch (Exception e) {
 			System.out.println("alternativa inválida");
 			return;
 		}
 
-		var q = new Questao();
+		var q = new QuestaoXadrez();
 		q.setId(DataBase.proximaQuestaoId++);
 		q.setProvaId(provaId);
 		q.setEnunciado(enunciado);
@@ -135,28 +136,17 @@ public class App {
 
 		for (var q : questoesDaProva) {
 			System.out.println("\nQuestão #" + q.getId());
-			System.out.println(q.getEnunciado());
+			q.exibirParaAluno();
 
-			System.out.println("Posição inicial:");
-			Xadrez.imprimirTabuleiroFen(q.getFenInicial());
-
-			for (var alt : q.getAlternativas()) {
-			    System.out.println(alt);
-			}
-
-			System.out.print("Sua resposta (A–E): ");
-			char marcada;
-			try {
-				marcada = Questao.normalizar(ComandoDeConsole.pegaInput("").trim().charAt(0));
-			} catch (Exception e) {
-				System.out.println("resposta inválida (marcando como errada)");
-				marcada = 'X';
-			}
+            String entrada = ComandoDeConsole.pegaInput("Sua resposta (A–E): ");
+            boolean acertou = q.verificaResposta(entrada);
 
 			var r = new Resposta();
 			r.setQuestaoId(q.getId());
-			r.setAlternativaMarcada(marcada);
-			r.setCorreta(q.isRespostaCorreta(marcada));
+			r.setCorreta(acertou);
+            if (!entrada.isBlank()){
+                r.setAlternativaMarcada(Character.toUpperCase(entrada.trim().charAt(0)));
+            }
 
 			tentativa.getRespostas().add(r);
 		}
@@ -228,7 +218,7 @@ public class App {
 		prova.setTitulo("Olimpíada 2026 • Nível 1 • Prova A");
 		DataBase.provas.add(prova);
 
-		var q1 = new Questao();
+		var q1 = new QuestaoXadrez();
 		q1.setId(DataBase.proximaQuestaoId++);
 		q1.setProvaId(prova.getId());
 
