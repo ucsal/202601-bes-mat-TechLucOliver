@@ -1,14 +1,20 @@
 package br.com.ucsal.olimpiadas.view;
 
 import br.com.ucsal.olimpiadas.Questao;
+import br.com.ucsal.olimpiadas.interfaces.ComDica;
 
 import java.util.Arrays;
 
-public class QuestaoXadrez extends Questao {
+public class QuestaoXadrez extends Questao implements ComDica {
 
     private String[] alternativas = new String[5];
     private char alternativaCorreta;
     private String fenInicial;
+    private String dica;
+
+    public void setDica(String dica) {
+        this.dica = dica;
+    }
 
     public char getAlternativaCorreta() {
         return alternativaCorreta;
@@ -67,5 +73,10 @@ public class QuestaoXadrez extends Questao {
         }catch (Exception e){
             return false;
         }
+    }
+
+    @Override
+    public String obterDica() {
+        return this.dica;
     }
 }

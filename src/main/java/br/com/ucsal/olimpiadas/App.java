@@ -1,5 +1,6 @@
 package br.com.ucsal.olimpiadas;
 
+import br.com.ucsal.olimpiadas.interfaces.ComDica;
 import br.com.ucsal.olimpiadas.repository.DataBase;
 import br.com.ucsal.olimpiadas.view.ComandoDeConsole;
 import br.com.ucsal.olimpiadas.view.QuestaoXadrez;
@@ -96,6 +97,11 @@ public class App {
 		q.setAlternativas(alternativas);
 		q.setAlternativaCorreta(correta);
 
+        String dica = ComandoDeConsole.pegaInput("Dica da questão (pressione Enter para pular): ");
+        if (!dica.isBlank()){
+            q.setDica(dica);
+        }
+
 		DataBase.questoes.add(q);
 
 		System.out.println("Questão cadastrada: " + q.getId() + " (na prova " + provaId + ")");
@@ -137,6 +143,13 @@ public class App {
 		for (var q : questoesDaProva) {
 			System.out.println("\nQuestão #" + q.getId());
 			q.exibirParaAluno();
+
+            if (q instanceof ComDica questaoComDica && questaoComDica.obterDica() != null){
+                String querDica = ComandoDeConsole.pegaInput("\nPrecisa de uma dica? (S/N): ");
+                if (querDica.equalsIgnoreCase("S")){
+                    System.out.println("Dica: "+questaoComDica.obterDica()+"\n");
+                }
+            }
 
             String entrada = ComandoDeConsole.pegaInput("Sua resposta (A–E): ");
             boolean acertou = q.verificaResposta(entrada);
@@ -233,6 +246,8 @@ public class App {
 		q1.setAlternativas(new String[] { "A) Qh7#", "B) Qf5#", "C) Qc8#", "D) Qh8#", "E) Qe6#" });
 
 		q1.setAlternativaCorreta('C');
+
+        q1.setDica("Obeserve a Dama apoiada pelo Bispo.");
 
 		DataBase.questoes.add(q1);
 	}

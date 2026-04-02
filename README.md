@@ -18,3 +18,10 @@ Aplicando o terceiro princípio do SOLID (Princípio da Substituição de Liskov
 Alterado o atributo char da classe Resposta para String<p>
 Resposta passa a suportar a generalização de Questao<p>
 Alterado o método aplicarProva() para ser verdadeiramente universal<p>
+***********<p>
+Aplicando o quarto principio do SOLID (Princípio da Segregação de Interfaces)<p>
+Criada interface (ComDica) para ser implementada a algumas questões que possam ter dicas<p>
+A classe QuestaoXadrez implementa ComDica<p>
+Adicionada lógica de cadastrar dicas ao cadastrar uma questão<p>
+Adicionada lógica ao aplicar a prova, mostrando a dica da questão que possui uma<p>
+Adicionado set de dica no método Seed()<p>
