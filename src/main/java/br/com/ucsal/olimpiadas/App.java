@@ -1,6 +1,7 @@
 package br.com.ucsal.olimpiadas;
 
 import br.com.ucsal.olimpiadas.interfaces.ComDica;
+import br.com.ucsal.olimpiadas.interfaces.OlimpiadasRepository;
 import br.com.ucsal.olimpiadas.repository.DataBase;
 import br.com.ucsal.olimpiadas.view.ComandoDeConsole;
 import br.com.ucsal.olimpiadas.view.QuestaoXadrez;
@@ -8,7 +9,11 @@ import br.com.ucsal.olimpiadas.view.Xadrez;
 
 public class App {
 
+    private static OlimpiadasRepository repository;
+
 	static void main() {
+
+        repository = new DataBase();
 		seed();
 
 		while (true) {

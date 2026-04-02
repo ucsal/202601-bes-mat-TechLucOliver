@@ -11,17 +11,22 @@ Criados métodos exibirAluno() e verificaResposta(String entrada).<p>
 Criada a classe QuestaoXadrez estendendo a classe Questao encapsulando a lógica do jogo.<p>
 Implementado o exibirAluno() para imprimir o enunciado e mostrar o tabuleiro.<p>
 Implementado o verificaResposta(String entrada) contendo a lógica de normalização de chars e comparação com a alternativa correta.<p>
-Encapsulados os atributos fenInicial e alternativas<p>
-Simplificado o método aplicarProva()<p>
+Encapsulados os atributos fenInicial e alternativas.<p>
+Simplificado o método aplicarProva().<p>
 ***********<p>
 Aplicando o terceiro princípio do SOLID (Princípio da Substituição de Liskov):<p>
-Alterado o atributo char da classe Resposta para String<p>
-Resposta passa a suportar a generalização de Questao<p>
-Alterado o método aplicarProva() para ser verdadeiramente universal<p>
+Alterado o atributo char da classe Resposta para String.<p>
+Resposta passa a suportar a generalização de Questao.<p>
+Alterado o método aplicarProva() para ser verdadeiramente universal.<p>
 ***********<p>
-Aplicando o quarto principio do SOLID (Princípio da Segregação de Interfaces)<p>
-Criada interface (ComDica) para ser implementada a algumas questões que possam ter dicas<p>
-A classe QuestaoXadrez implementa ComDica<p>
-Adicionada lógica de cadastrar dicas ao cadastrar uma questão<p>
-Adicionada lógica ao aplicar a prova, mostrando a dica da questão que possui uma<p>
-Adicionado set de dica no método Seed()<p>
+Aplicando o quarto principio do SOLID (Princípio da Segregação de Interfaces).<p>
+Criada interface (ComDica) para ser implementada a algumas questões que possam ter dicas.<p>
+A classe QuestaoXadrez implementa ComDica.<p>
+Adicionada lógica de cadastrar dicas ao cadastrar uma questão.<p>
+Adicionada lógica ao aplicar a prova, mostrando a dica da questão que possui uma.<p>
+Adicionado set de dica no método Seed().<p>
+***********<p>
+Aplicando o quinto principio do SOLID (Princípio da Inversão de Dependência).<p>
+Criada a interface OlimpiadaRepository com os métodos salvar, buscar e listar das provas, questões e tentativas.<p>
+A classe DataBase implementa OlimpiadaRepository e implementa os métodos.<p>
+Adicionado e inicializado recenbem um new DataBase o atributo OlimpiadaRepository repository na classe App.<p>
