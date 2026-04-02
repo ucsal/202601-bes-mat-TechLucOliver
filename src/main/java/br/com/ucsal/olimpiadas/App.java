@@ -145,7 +145,7 @@ public class App {
 			r.setQuestaoId(q.getId());
 			r.setCorreta(acertou);
             if (!entrada.isBlank()){
-                r.setAlternativaMarcada(Character.toUpperCase(entrada.trim().charAt(0)));
+                r.setRespostaFornecida(entrada);
             }
 
 			tentativa.getRespostas().add(r);
